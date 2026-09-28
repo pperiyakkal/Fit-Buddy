@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="center-section">
+  <div class="card form-card narrow">
+    <p class="eyebrow">ADAPT YOUR PLAN</p>
+    <h1>Update {{ username }}'s plan</h1>
+    <p class="lead">Describe what you want changed. For example: “add more cardio”, “reduce leg volume”, or “include another recovery day”.</p>
+    <form action="/submit-feedback" method="post">
+      <input type="hidden" name="user_id" value="{{ user_id }}">
+      <label>Feedback
+        <textarea name="feedback" rows="8" required minlength="5" maxlength="2000" placeholder="What should FitBuddy change?"></textarea>
+      </label>
+      <button class="btn primary" type="submit">Regenerate plan →</button>
+      <a class="btn secondary" href="/result/{{ user_id }}">Back to plan</a>
+    </form>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="result-header">
+  <div>
+    <p class="eyebrow">YOUR PERSONALIZED PLAN</p>
+    <h1>Hi {{ user.username }} 👋</h1>
+    <p class="lead">Goal: <strong>{{ user.goal|title }}</strong> · Intensity: <strong>{{ user.intensity|title }}</strong></p>
+  </div>
+  {% if updated %}
+    <span class="badge">Updated with feedback</span>
+  {% endif %}
+</section>
+
+<div class="profile-grid">
+  <div><span>Name</span><strong>{{ user.username }}</strong></div>
+  <div><span>User ID</span><strong>{{ user.user_id }}</strong></div>
+  <div><span>Age</span><strong>{{ user.age }}</strong></div>
+  <div><span>Weight</span><strong>{{ user.weight }} kg</strong></div>
+  <div><span>Goal</span><strong>{{ user.goal|title }}</strong></div>
+  <div><span>Intensity</span><strong>{{ user.intensity|title }}</strong></div>
+</div>
+
+<div class="content-grid">
+  <article class="card plan-card">
+    <div class="section-heading">
+      <div><p class="eyebrow">WORKOUT</p><h2>7-Day Fitness Plan</h2></div>
+      <button class="btn small" onclick="copyPlan()">Copy plan</button>
+    </div>
+    <pre id="workout-plan">{{ workout_plan }}</pre>
+  </article>
+
+  <aside class="side-stack">
+    <article class="card tip-card">
+      <p class="eyebrow">NUTRITION / RECOVERY</p>
+      <h2>One useful tip</h2>
+      <p>{{ nutrition_tip }}</p>
+    </article>
+
+    {% if feedback %}
+    <article class="card">
+      <p class="eyebrow">FEEDBACK USED</p>
+      <p>{{ feedback }}</p>
+    </article>
+    {% endif %}
+
+    <article class="card action-card">
+      <h2>Want to change it?</h2>
+      <p>Tell FitBuddy what you want adjusted and regenerate the plan.</p>
+      <a class="btn primary" href="/feedback/{{ user.user_id }}">Update with feedback</a>
+      <a class="btn secondary" href="/">Create another plan</a>
+    </article>
+  </aside>
+</div>
+{% endblock %}
